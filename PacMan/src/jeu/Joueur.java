@@ -1,5 +1,5 @@
 package jeu;
 
-public class Joueur extends Fantome{
+public class Joueur extends Personnage{
 
 }
