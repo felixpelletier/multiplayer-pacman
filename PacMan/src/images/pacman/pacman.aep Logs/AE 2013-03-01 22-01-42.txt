@@ -1,0 +1,31 @@
+Adobe After Effects v10.0.2 (Windows 64) render log for project “pacman.aep”
+
+Rendering started on 2013-03-01 at 22:01:42
+
+
+  2013-03-01 22:01:42: Starting composition “Mort”.
+
+
+  Output To: C:\Users\Félix\Documents\Java\workspace\PacMan\src\images\pacman\Mort.mov
+  
+After Effects error: Rendering error while writing to file “C:\Users\Félix\Documents\Java\workspace\PacMan\src\images\pacman\Mort.mov”. Unable to delete existing file. (-1610153460)
+  didn’t delete empty file “Mort.mov” because it was larger than expected. (26  ::  170)
+  2013-03-01 22:01:42: Finished composition “Mort”.
+
+
+
+  2013-03-01 22:01:42: Starting composition “Mouvement”.
+
+
+  Output To: C:\Users\Félix\Documents\Java\workspace\PacMan\src\images\pacman\Mouvement.mov
+  
+After Effects error: Rendering error while writing to file “C:\Users\Félix\Documents\Java\workspace\PacMan\src\images\pacman\Mouvement.mov”. Unable to delete existing file. (-1610153460)
+  didn’t delete empty file “Mouvement.mov” because it was larger than expected. (26  ::  170)
+  2013-03-01 22:01:43: Finished composition “Mouvement”.
+
+
+
+  Total Time Elapsed: 1 Seconds
+
+Log closed on 2013-03-01 at 22:01:43
+

@@ -1,3 +1,5 @@
+
+
 package affichage;
 
 import java.awt.Color;
@@ -12,8 +14,6 @@ public class PointPanel extends JPanel{
 
 	private Case[][] Cases;
 	private int tailleCase;
-	
-	
 	
 	public PointPanel(Case[][] Cases, int tailleCase){
 		this.Cases = Cases;
@@ -46,3 +46,4 @@ public class PointPanel extends JPanel{
      }
 	
 }
+
