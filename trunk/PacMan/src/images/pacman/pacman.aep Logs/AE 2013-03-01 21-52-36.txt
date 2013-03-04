@@ -1,0 +1,27 @@
+Adobe After Effects v10.0.2 (Windows 64) render log for project “pacman.aep”
+
+Rendering started on 2013-03-01 at 21:52:36
+
+
+  2013-03-01 21:52:36: Starting composition “Mort”.
+
+
+  Output To: C:\Users\Félix\Videos\Marco\Mort_[#####].png
+  
+  2013-03-01 21:52:37: Finished composition “Mort”.
+
+
+
+  2013-03-01 21:52:37: Starting composition “Mouvement”.
+
+
+  Output To: C:\Users\Félix\Videos\Marco\Mouvement_[#####].png
+  
+  2013-03-01 21:52:38: Finished composition “Mouvement”.
+
+
+
+  Total Time Elapsed: 2 Seconds
+
+Log closed on 2013-03-01 at 21:52:38
+

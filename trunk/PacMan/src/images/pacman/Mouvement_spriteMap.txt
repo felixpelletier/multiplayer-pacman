@@ -1,0 +1,5 @@
+Mouvement_00000 = 0 0 20 20
+Mouvement_00001 = 20 0 20 20
+Mouvement_00002 = 40 0 20 20
+Mouvement_00003 = 60 0 20 20
+Mouvement_00004 = 80 0 20 20

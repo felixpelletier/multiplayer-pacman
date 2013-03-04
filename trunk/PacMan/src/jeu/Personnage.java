@@ -2,10 +2,15 @@ package jeu;
 
 import java.awt.geom.Point2D;
 
-public abstract class Personnage {
+public abstract class Personnage extends Chose{
 
 	private Point2D.Float position = new Point2D.Float();
 	private float vitesse;
+	
+	public Personnage(){
+		setLargeur(20);
+		setHauteur(20);
+	}
 	
 	public enum DIRECTION{
 		N,E,S,W;

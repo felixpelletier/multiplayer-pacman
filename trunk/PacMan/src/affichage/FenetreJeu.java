@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +15,9 @@ import javax.swing.OverlayLayout;
 
 import jeu.Case;
 import jeu.Case.TYPE_CASE;
+import jeu.Chose;
+import jeu.Pacman;
+import jeu.Personnage;
 
 public class FenetreJeu extends JFrame{
 
@@ -22,8 +26,10 @@ public class FenetreJeu extends JFrame{
 	private int largeur = 560,hauteur = 720;
 	private int tailleCase = largeur / Case.NB_CASES_X;
 
-	
+	ArrayList<Chose> choses = new ArrayList<Chose>();
 
+	Pacman j = new Pacman();
+	
 	Graphics g;
 
 	public FenetreJeu(Case[][] Cases){
@@ -34,6 +40,9 @@ public class FenetreJeu extends JFrame{
 		
 		PointPanel pointPanel = new PointPanel(Cases,tailleCase);
 		MurPanel murPanel = new MurPanel(Cases,tailleCase);
+		ChosesPanel chosesPanel = new ChosesPanel(choses);
+		
+		addChose(j);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -42,29 +51,27 @@ public class FenetreJeu extends JFrame{
 		p.setLayout(l);
 		p.setPreferredSize(new Dimension(largeur,hauteur));
 		
+		p.add(chosesPanel);
 		p.add(pointPanel);
 		p.add(murPanel);
 		
 		this.add(p, BorderLayout.CENTER);
 		
+		
 		pack();
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Cases[1][4] = new Case(TYPE_CASE.Vide);
+
 		pointPanel.repaint();
 		
 	}
 	
 	public int getTailleCase() {
 		return tailleCase;
+	}
+	
+	public void addChose(Chose chose){
+		choses.add(chose);
 	}
 }
