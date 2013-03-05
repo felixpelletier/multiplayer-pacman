@@ -43,16 +43,16 @@ public abstract class Personnage extends Chose{
 		
 		switch(direction){
 		case E:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x - largeur/2 + FenetreJeu.TAILLE_CASE, getCenterPosition().y);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x + FenetreJeu.TAILLE_CASE / 2, getCenterPosition().y);
 			break;
 		case N:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y + hauteur/2 - FenetreJeu.TAILLE_CASE);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y - FenetreJeu.TAILLE_CASE / 2);
 			break;
 		case S:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y - hauteur/2 + FenetreJeu.TAILLE_CASE);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y + FenetreJeu.TAILLE_CASE / 2);
 			break;
 		case W:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x + largeur/2 - FenetreJeu.TAILLE_CASE, getCenterPosition().y);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x - FenetreJeu.TAILLE_CASE / 2, getCenterPosition().y);
 			break;
 		default:
 			break;
