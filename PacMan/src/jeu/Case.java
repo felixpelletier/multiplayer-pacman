@@ -49,4 +49,12 @@ public class Case {
 	public TYPE_CASE getType(){
 		return type;
 	}
+
+	public void setType(TYPE_CASE type) {
+		this.type = type;
+	}
+	
+	public boolean estBloc(){
+		return type.toString().contains("Bloc");
+	}
 }

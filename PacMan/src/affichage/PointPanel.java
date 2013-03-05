@@ -23,7 +23,9 @@ public class PointPanel extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		
-		setOpaque(false);
+		//System.out.println("Point paint!");
+		
+		//setOpaque(false);
 		
 		g.translate(getInsets().left + getInsets().right, getInsets().top);
 		
@@ -41,7 +43,7 @@ public class PointPanel extends JPanel{
 				}
 			}
 		}
-		super.paintComponent(g);
+		//super.paintComponent(g);
 		
      }
 	

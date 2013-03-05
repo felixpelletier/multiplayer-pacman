@@ -1,29 +1,140 @@
 package jeu;
 
+import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import jeu.Case.TYPE_CASE;
 
+import affichage.FenetreJeu;
 import affichage.outils.SpriteSheetLoader;
 
-public class Pacman extends Personnage{
+public class Pacman extends Personnage implements KeyListener{
 
-	BufferedImage[] sprites;
+	private BufferedImage[] sprites;
+
+	private int points = 0;
 	
-	public enum MOVEMENT_SPRITE{
+	//Faire interface animateable
+	private int animationStep = 1;
+	private int animationDelay = 2; 
+	
+	public enum MOUVEMENT_SPRITE{
 		Ferme,E,S,W,N;
 	}
 	
-	public Pacman(){
-		this.setPosition(100, 100);
+	MOUVEMENT_SPRITE sprite = MOUVEMENT_SPRITE.E;
+	
+	public Pacman(Case[][] cases){
+		super(cases);
+		this.cases = cases;
+		this.setDimension(25,25);
+		this.setPosition(14*FenetreJeu.TAILLE_CASE, 20*FenetreJeu.TAILLE_CASE);
+		vitesse = 2;
 		sprites = SpriteSheetLoader.loadSheet(Pacman.class.getClass().getResource("/images/pacman/" + "Mouvement_spriteMap.gif"));
 	}
 
-
 	public BufferedImage getImage() {
 		
-		return sprites[1];
+		return sprites[sprite.ordinal()];
 		
 	}
+	
+	public void manger(){
+		Case caseCourante = cases[FenetreJeu.positionVersCase(this.getCenterPosition().x)][FenetreJeu.positionVersCase(this.getCenterPosition().y)];
+		switch (caseCourante.getType()){
+		case Point:
+			caseCourante.setType(TYPE_CASE.Vide);
+			points++;
+			break;
+		case GrosPoint:
+			caseCourante.setType(TYPE_CASE.Vide);
+			points++;
+			break;
+		default:
+			break;
+		}
+	}
+	
+	@Override
+	public void mettreAJour() {
+		manger();
+		verifierCollision();
+
+		if(bouge){
+			bouger();
+			animer();
+		}
+		else{
+			sprite = MOUVEMENT_SPRITE.valueOf(direction.name());
+		}
+	}
+
+	private void animer() {
+		if(animationStep == animationDelay){
+			animationStep = 1;
+			if(sprite.equals(MOUVEMENT_SPRITE.Ferme)){
+				sprite = MOUVEMENT_SPRITE.valueOf(direction.name());
+			}
+			else{
+				sprite = MOUVEMENT_SPRITE.Ferme;
+			}
+		}else{
+			animationStep++;
+		}
+	}
+
+
+	public void keyPressed(KeyEvent e) {
+
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_LEFT:
+			direction= DIRECTION.W;
+			bouge = true;
+			break;
+		case KeyEvent.VK_RIGHT:
+			direction= DIRECTION.E;
+			bouge = true;
+			break;
+		case KeyEvent.VK_UP:
+			direction= DIRECTION.N;
+			bouge = true;
+			break;
+		case KeyEvent.VK_DOWN:
+			direction= DIRECTION.S;
+			bouge = true;
+			break;
+		}
+
+
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_LEFT:
+			break;
+		case KeyEvent.VK_RIGHT:
+			break;
+		case KeyEvent.VK_UP:
+			break;
+		case KeyEvent.VK_DOWN:
+			break;
+		}
+
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 	
 }
