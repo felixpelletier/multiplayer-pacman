@@ -1,16 +1,20 @@
 package jeu;
 
-import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 public abstract class Chose {
 	
-	private Point2D.Float position = new Point2D.Float();
-	private int largeur,hauteur;
+	protected Point2D.Float position = new Point2D.Float();
+	protected int largeur;
+	protected int hauteur;
 	
 	public Point2D.Float getPosition() {
 		return position;
+	}
+	
+	public Point2D.Float getCenterPosition() {
+		return new Point2D.Float(position.x + largeur/2, position.y + hauteur/2);
 	}
 
 	public void setPosition(Point2D.Float position) {
@@ -36,7 +40,15 @@ public abstract class Chose {
 	public void setHauteur(int hauteur) {
 		this.hauteur = hauteur;
 	}
+	
+	public void setDimension(int largeur, int hauteur) {
+		setLargeur(largeur);
+		setHauteur(hauteur);
+		
+	}
 
+
+	public abstract void mettreAJour();
 	public abstract BufferedImage getImage();
 
 }

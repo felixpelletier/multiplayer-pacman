@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import jeu.Case;
 
+@SuppressWarnings("serial")
 public class MurPanel extends JPanel{
 
 	private Case[][] Cases;
@@ -17,9 +18,11 @@ public class MurPanel extends JPanel{
 		this.tailleCase = tailleCase;
 	}
 	
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
+	
+		//System.out.println("Mur paint!");
 		
-		super.paint(g);
+		//super.paint(g);
 
 		g.translate(getInsets().left + getInsets().right, getInsets().top);
 		
