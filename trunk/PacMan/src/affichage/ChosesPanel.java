@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import jeu.Case;
 import jeu.Case.TYPE_CASE;
 import jeu.Chose;
-import jeu.Personnage;
 
 public class ChosesPanel extends JPanel{
 

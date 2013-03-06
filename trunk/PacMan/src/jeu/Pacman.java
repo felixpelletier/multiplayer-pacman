@@ -31,7 +31,7 @@ public class Pacman extends Personnage implements KeyListener{
 		this.cases = cases;
 		this.setDimension(25,25);
 		this.setPosition(14*FenetreJeu.TAILLE_CASE, 20*FenetreJeu.TAILLE_CASE);
-		vitesse = 2;
+		vitesse = 3;
 		sprites = SpriteSheetLoader.loadSheet(Pacman.class.getClass().getResource("/images/pacman/" + "Mouvement_spriteMap.gif"));
 	}
 
@@ -90,19 +90,39 @@ public class Pacman extends Personnage implements KeyListener{
 
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_LEFT:
-			direction= DIRECTION.W;
+			if (direction.equals(DIRECTION.E) || !bouge){
+				direction =  DIRECTION.W;
+			}
+			else{
+				nouvelleDirection = DIRECTION.W;
+			}
 			bouge = true;
 			break;
 		case KeyEvent.VK_RIGHT:
-			direction= DIRECTION.E;
+			if (direction.equals(DIRECTION.W) || !bouge){
+				direction =  DIRECTION.E;
+			}
+			else{
+				nouvelleDirection= DIRECTION.E;
+			}
 			bouge = true;
 			break;
 		case KeyEvent.VK_UP:
-			direction= DIRECTION.N;
+			if (direction.equals(DIRECTION.S) || !bouge){
+				direction =  DIRECTION.N;
+			}
+			else{
+				nouvelleDirection= DIRECTION.N;
+			}
 			bouge = true;
 			break;
 		case KeyEvent.VK_DOWN:
-			direction= DIRECTION.S;
+			if (direction.equals(DIRECTION.N) || !bouge){
+				direction =  DIRECTION.S;
+			}
+			else{
+				nouvelleDirection= DIRECTION.S;
+			}
 			bouge = true;
 			break;
 		}
