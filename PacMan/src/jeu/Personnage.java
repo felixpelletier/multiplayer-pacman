@@ -20,6 +20,7 @@ public abstract class Personnage extends Chose{
 	}
 	
 	protected DIRECTION direction = DIRECTION.E;
+	protected DIRECTION nouvelleDirection = DIRECTION.E;
 	
 	protected void bouger(){
 		switch (direction){
@@ -38,9 +39,12 @@ public abstract class Personnage extends Chose{
 		}
 	}
 	
-	protected void verifierCollision() {
+	protected Case getProchaineCase(){
+		return getProchaineCase(direction);
+	}
+	
+	protected Case getProchaineCase(DIRECTION direction){
 		Point prochaineCase = null;
-		
 		switch(direction){
 		case E:
 			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x + FenetreJeu.TAILLE_CASE / 2, getCenterPosition().y);
@@ -58,8 +62,31 @@ public abstract class Personnage extends Chose{
 			break;
 		}
 		
-		if(cases[prochaineCase.x][prochaineCase.y].estBloc()){
-			bouge = false;
+		return cases[prochaineCase.x][prochaineCase.y];
+	}
+	
+	protected void verifierCollision() {
+
+		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc()){
+			changerDirection();
+		}
+		
+		if(getProchaineCase().estBloc()){
+			bouge = changerDirection();
+		}
+		
+		
+		
+	}
+	
+	public boolean changerDirection(){
+		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc()){
+			direction = DIRECTION.values()[nouvelleDirection.ordinal()];
+			nouvelleDirection = null;
+			return true;
+		}
+		else{
+			return false;
 		}
 	}
 	

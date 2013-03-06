@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import jeu.Case;
-import jeu.Case.TYPE_CASE;
 
 public class PointPanel extends JPanel{
 

@@ -19,8 +19,6 @@ import javax.swing.RepaintManager;
 import jeu.Case;
 import jeu.Case.TYPE_CASE;
 import jeu.Chose;
-import jeu.Pacman;
-import jeu.Personnage;
 
 public class FenetreJeu extends JFrame{
 
