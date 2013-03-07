@@ -14,7 +14,11 @@ public abstract class Chose {
 	}
 	
 	public Point2D.Float getCenterPosition() {
-		return new Point2D.Float(position.x + largeur/2, position.y + hauteur/2);
+		return new Point2D.Float(position.x + largeur/2.0f, position.y + hauteur/2.0f);
+	}
+	
+	public void setCenterPosition(float x,float y) {
+		setPosition(x - largeur/2.0f, y - hauteur/2.0f);
 	}
 
 	public void setPosition(Point2D.Float position) {
