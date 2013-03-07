@@ -86,6 +86,7 @@ public class FenetreJeu extends JFrame{
 	public static Point positionVersCase(double x,double y){
 		return new Point(positionVersCase(x),positionVersCase(y));
 	}
+	
 	public static Point positionVersCase(Point2D point){
 		return new Point(positionVersCase(point.getX()),positionVersCase(point.getY()));
 	}

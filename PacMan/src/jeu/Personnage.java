@@ -47,16 +47,16 @@ public abstract class Personnage extends Chose{
 		Point prochaineCase = null;
 		switch(direction){
 		case E:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x + FenetreJeu.TAILLE_CASE / 2, getCenterPosition().y);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x + FenetreJeu.TAILLE_CASE * 0.5 + 1, getCenterPosition().y);
 			break;
 		case N:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y - FenetreJeu.TAILLE_CASE / 2);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y - FenetreJeu.TAILLE_CASE *0.5 - 1);
 			break;
 		case S:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y + FenetreJeu.TAILLE_CASE / 2);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x, getCenterPosition().y + FenetreJeu.TAILLE_CASE *0.5 + 1);
 			break;
 		case W:
-			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x - FenetreJeu.TAILLE_CASE / 2, getCenterPosition().y);
+			prochaineCase = FenetreJeu.positionVersCase(getCenterPosition().x - FenetreJeu.TAILLE_CASE *0.5 - 1, getCenterPosition().y);
 			break;
 		default:
 			break;
@@ -67,11 +67,9 @@ public abstract class Personnage extends Chose{
 	
 	protected void verifierCollision() {
 
-		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc()){
+		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc() && (getCenterPosition().x + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE <= 1 && (getCenterPosition().y + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE <= 1){
 			changerDirection();
-		}
-		
-		if(getProchaineCase().estBloc()){
+		}else if(getProchaineCase().estBloc()){
 			bouge = changerDirection();
 		}
 		
@@ -79,8 +77,42 @@ public abstract class Personnage extends Chose{
 		
 	}
 	
+	public void ajusterPosition(){
+		
+		Point2D.Float ajustement = new Point2D.Float();
+		ajustement.x = (getCenterPosition().x + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE;
+		ajustement.y = (getCenterPosition().y + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE;
+		
+		if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
+			ajustement.x= FenetreJeu.TAILLE_CASE - ajustement.x;
+		
+		if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
+			ajustement.y= FenetreJeu.TAILLE_CASE - ajustement.y;
+		
+		switch(direction){
+		case E:
+			position.x -= ajustement.x;
+			break;
+		case N:
+				position.y += ajustement.y;
+			break;
+		case S:
+				position.y -= ajustement.y;
+			break;
+		case W:
+				position.x += ajustement.x;
+			break;
+		default:
+			break;
+		}
+	}
+	
 	public boolean changerDirection(){
+		
+		ajusterPosition();
+		
 		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc()){
+			
 			direction = DIRECTION.values()[nouvelleDirection.ordinal()];
 			nouvelleDirection = null;
 			return true;
