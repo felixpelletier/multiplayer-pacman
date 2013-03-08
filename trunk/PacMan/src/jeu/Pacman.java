@@ -16,7 +16,7 @@ public class Pacman extends Personnage implements KeyListener{
 
 	private int points = 0;
 	
-	//Faire interface animateable
+	//Faire interface animatable
 	private int animationStep = 1;
 	private int animationDelay = 2; 
 	
