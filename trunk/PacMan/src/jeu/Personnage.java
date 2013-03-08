@@ -87,9 +87,9 @@ public abstract class Personnage extends Chose{
 		switch(direction){
 		case E:
 			if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
-				ajustement.x= ajustement.x - FenetreJeu.TAILLE_CASE;
+				ajustement.x= FenetreJeu.TAILLE_CASE - ajustement.x;
 			
-			position.x -= ajustement.x;
+			position.x += ajustement.x;
 			break;
 		case N:
 			if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
@@ -103,8 +103,8 @@ public abstract class Personnage extends Chose{
 			break;
 		case W:
 			if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
-				ajustement.x= FenetreJeu.TAILLE_CASE - ajustement.x;
-				position.x += ajustement.x;
+				ajustement.x= ajustement.x - FenetreJeu.TAILLE_CASE;
+				position.x -= ajustement.x;
 			break;
 		default:
 			break;
