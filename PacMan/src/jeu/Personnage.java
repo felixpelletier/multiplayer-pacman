@@ -87,18 +87,21 @@ public abstract class Personnage extends Chose{
 		switch(direction){
 		case E:
 			if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
-				ajustement.x= FenetreJeu.TAILLE_CASE - ajustement.x;
-			
-			position.x += ajustement.x;
+				ajustement.x= ajustement.x - FenetreJeu.TAILLE_CASE;
+				
+			System.out.println("Avant: " + position.x);
+			position.x -= ajustement.x;
+			System.out.println("Après: " + position.x);
 			break;
 		case N:
 			if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
-				ajustement.y= FenetreJeu.TAILLE_CASE - ajustement.y;
-				position.y += ajustement.y;
+				ajustement.y=  ajustement.y - FenetreJeu.TAILLE_CASE;
+				position.y -= ajustement.y;
 			break;
 		case S:
 			if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
-				ajustement.y= ajustement.y - FenetreJeu.TAILLE_CASE;
+				ajustement.y=  ajustement.y - FenetreJeu.TAILLE_CASE;
+			
 				position.y -= ajustement.y;
 			break;
 		case W:
