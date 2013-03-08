@@ -67,7 +67,7 @@ public abstract class Personnage extends Chose{
 	
 	protected void verifierCollision() {
 
-		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc() && (getCenterPosition().x + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE <= 1 && (getCenterPosition().y + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE <= 1){
+		if(nouvelleDirection != null && !getProchaineCase(nouvelleDirection).estBloc() && (getCenterPosition().x + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE < vitesse && (getCenterPosition().y + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE < vitesse){
 			changerDirection();
 		}else if(getProchaineCase().estBloc()){
 			bouge = changerDirection();
@@ -83,23 +83,27 @@ public abstract class Personnage extends Chose{
 		ajustement.x = (getCenterPosition().x + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE;
 		ajustement.y = (getCenterPosition().y + FenetreJeu.TAILLE_CASE/2) % FenetreJeu.TAILLE_CASE;
 		
-		if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
-			ajustement.x= FenetreJeu.TAILLE_CASE - ajustement.x;
-		
-		if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
-			ajustement.y= FenetreJeu.TAILLE_CASE - ajustement.y;
 		
 		switch(direction){
 		case E:
+			if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
+				ajustement.x= ajustement.x - FenetreJeu.TAILLE_CASE;
+			
 			position.x -= ajustement.x;
 			break;
 		case N:
+			if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
+				ajustement.y= FenetreJeu.TAILLE_CASE - ajustement.y;
 				position.y += ajustement.y;
 			break;
 		case S:
+			if (ajustement.y > FenetreJeu.TAILLE_CASE/2)
+				ajustement.y= ajustement.y - FenetreJeu.TAILLE_CASE;
 				position.y -= ajustement.y;
 			break;
 		case W:
+			if (ajustement.x > FenetreJeu.TAILLE_CASE/2)
+				ajustement.x= FenetreJeu.TAILLE_CASE - ajustement.x;
 				position.x += ajustement.x;
 			break;
 		default:
