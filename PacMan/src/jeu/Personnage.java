@@ -140,6 +140,10 @@ public abstract class Personnage extends Chose{
 	public Point2D.Float getPosition() {
 		return position;
 	}
+	
+	public Point getCase() {
+		return new Point((int)getCenterPosition().x/FenetreJeu.TAILLE_CASE,(int)getCenterPosition().y/FenetreJeu.TAILLE_CASE);
+	}
 
 	
 	

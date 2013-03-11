@@ -35,6 +35,7 @@ public class FenetreJeu extends JFrame{
 	private PointPanel pointPanel = null;
 	private MurPanel murPanel = null;
 	private ChosesPanel chosesPanel = null;
+	private PathFinderTestPanel pathFinderTestPanel = null;
 
 	public FenetreJeu(Case[][] Cases){
 
@@ -45,6 +46,7 @@ public class FenetreJeu extends JFrame{
 		pointPanel = new PointPanel(Cases,TAILLE_CASE);
 		murPanel = new MurPanel(Cases,TAILLE_CASE);
 		chosesPanel = new ChosesPanel(choses);
+		pathFinderTestPanel = new PathFinderTestPanel(Cases,TAILLE_CASE,choses);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -54,6 +56,7 @@ public class FenetreJeu extends JFrame{
 		p.setPreferredSize(new Dimension(LARGEUR,HAUTEUR));
 		
 		p.add(chosesPanel);
+		p.add(pathFinderTestPanel);
 		p.add(pointPanel);
 		p.add(murPanel);
 		
