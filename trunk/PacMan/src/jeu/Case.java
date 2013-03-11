@@ -57,4 +57,5 @@ public class Case {
 	public boolean estBloc(){
 		return type.toString().contains("Bloc");
 	}
+	
 }
