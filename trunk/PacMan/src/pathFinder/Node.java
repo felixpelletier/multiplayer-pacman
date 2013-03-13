@@ -2,6 +2,8 @@ package pathFinder;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Node {
 
@@ -15,8 +17,8 @@ public class Node {
 		this.compteur = compteur;
 	}
 	
-	public boolean isBest(ArrayList<Node> nodes){
-		for(Node otherNode : nodes){
+	public boolean isBest(CopyOnWriteArrayList<Node> path){
+		for(Node otherNode : path){
 			if(this.point.equals(otherNode.point) && this.getCompteur() >= otherNode.getCompteur()){
 				return false;
 			}

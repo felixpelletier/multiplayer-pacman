@@ -33,11 +33,12 @@ public class PathFinderTestPanel extends JPanel{
 		
 		g.translate(getInsets().left + getInsets().right, getInsets().top);
 		
-		ArrayList<Node> weightMap = PathFinder.getPath(cases, new Point(1,4), ((Personnage) (choses.get(0))).getCase());
+		Point[] path = PathFinder.getPath(cases, new Point(1,4), ((Personnage) (choses.get(0))).getCase());
 				
-		for(Node node : weightMap){
-			g.setColor(new Color(node.getCompteur() * 255 / 15));
-			g.drawRect(node.getPoint().x * tailleCase, node.getPoint().y * tailleCase, tailleCase, tailleCase);
+		for(Point point : path){
+			g.setColor(Color.white);
+
+			g.drawRect(point.x * tailleCase, point.y * tailleCase, tailleCase, tailleCase);
 		}
 		//super.paintComponent(g);
 		
