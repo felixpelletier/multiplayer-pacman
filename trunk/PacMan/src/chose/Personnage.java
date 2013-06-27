@@ -1,7 +1,9 @@
-package jeu;
+package chose;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
+
+import jeu.Case;
 
 import affichage.FenetreJeu;
 
@@ -39,11 +41,9 @@ public abstract class Personnage extends Chose{
 		}
 	}
 	
-	protected Case getProchaineCase(){
-		return getProchaineCase(direction);
-	}
 	
-	protected Case getProchaineCase(DIRECTION direction){
+	
+	protected Point getProchainePosition(DIRECTION direction){
 		Point prochaineCase = null;
 		switch(direction){
 		case E:
@@ -62,8 +62,21 @@ public abstract class Personnage extends Chose{
 			break;
 		}
 		
+		return prochaineCase;
+	}
+	
+	protected Case getProchaineCase(){
+		return getProchaineCase(direction);
+	}
+	
+	protected Case getProchaineCase(DIRECTION direction){
+		
+		Point prochaineCase = getProchainePosition(direction);
+		
 		return cases[prochaineCase.x][prochaineCase.y];
 	}
+	
+	
 	
 	protected void verifierCollision() {
 
@@ -141,9 +154,7 @@ public abstract class Personnage extends Chose{
 		return position;
 	}
 	
-	public Point getCase() {
-		return new Point((int)getCenterPosition().x/FenetreJeu.TAILLE_CASE,(int)getCenterPosition().y/FenetreJeu.TAILLE_CASE);
-	}
+	
 
 	
 	

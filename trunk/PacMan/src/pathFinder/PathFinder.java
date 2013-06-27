@@ -6,11 +6,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Queue;
 import java.util.Stack;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import jeu.Case;
+import jeu.Case.TYPE_CASE;
 
 public final class PathFinder {
 
@@ -21,14 +20,15 @@ public final class PathFinder {
 	}
 	
 	
-	private static ArrayList<Node> getPossiblePaths(Case[][] cases,Point source,Point destination){
+	private static Stack<Node> getPossiblePaths(Case[][] cases,Point source,Point destination){
 
 		Node startNode = new Node(source,0);
-		CopyOnWriteArrayList<Node> path = new CopyOnWriteArrayList<Node>();
+		Stack<Node> path = new Stack<Node>();
 		path.add(startNode);
 		
 		int index = 0;
 		boolean finished = false;
+		
 		
 		while(index < path.size() && !finished){
 			Node currentNode = path.get(index);
@@ -51,11 +51,10 @@ public final class PathFinder {
 			path.addAll(subNodes);
 			index++;
 			
+			
 		}
 
-		Node[] array = new Node[path.size()];
-		array = path.toArray(array);
-		return new ArrayList<Node>(Arrays.asList(array));
+		return path;
 	}
 
 	private static ArrayList<Node> getSubNodes(final Node node){
@@ -67,21 +66,21 @@ public final class PathFinder {
 		return subNodes;
 	}
 	
-	private static ArrayList<Point> nodeListToPointList(ArrayList<Node> nodes){
+	/*private static ArrayList<Point> nodeListToPointList(ArrayList<Node> nodes){
 		ArrayList<Point> points = new ArrayList<Point>();
 			for (Node node : nodes){
 				points.add(node.getPoint());
 			}
 		return points;
-	}
+	}*/
 	
-	private static int[][] mapNodes(ArrayList<Node> list ,int width , int height){
+	private static int[][] mapNodes(Stack<Node> pathsList ,int width , int height){
 		int[][] map = new int[width][height];
 		
 		for (int[] ligne: map)
 		    Arrays.fill(ligne, -1);
 		
-		for(Node node : list){
+		for(Node node : pathsList){
 			map[node.getPoint().x][node.getPoint().y] = node.getCompteur();
 		}
 		
@@ -90,9 +89,23 @@ public final class PathFinder {
 	
 	
 	public static Point[] getPath(Case[][] cases,Point source,Point destination){//Retournera Point
-		 ArrayList<Node> pathsList = getPossiblePaths(cases,source,destination);
+		 Stack<Node> pathsList = getPossiblePaths(cases,source,destination);
 		 int[][] nodeMap = mapNodes(pathsList,cases.length, cases[0].length);
 		 Point[] path = getShortestPath(nodeMap,source,destination);
+		 
+		 return path;
+	}
+	
+	public static Point[] getPathExcluding(Case[][] cases,Point source,Point destination,Point exclusion){//Retournera Point
+		
+		Case.TYPE_CASE typeMemory = cases[exclusion.x][exclusion.y].getType();
+		cases[exclusion.x][exclusion.y].setType(TYPE_CASE.BlocH);
+		
+		 Stack<Node> pathsList = getPossiblePaths(cases,source,destination);
+		 int[][] nodeMap = mapNodes(pathsList,cases.length, cases[0].length);
+		 Point[] path = getShortestPath(nodeMap,source,destination);
+		 
+		 cases[exclusion.x][exclusion.y].setType(typeMemory);
 		 
 		 return path;
 	}
@@ -103,9 +116,10 @@ public final class PathFinder {
 		Point currentPosition = (Point) destination.clone();
 		path.add(currentPosition);
 		
+		
 		do{
 			
-			ArrayList<Point> candidates = new ArrayList(4);
+			ArrayList<Point> candidates = new ArrayList<Point>(4);
 			candidates.add(new Point(currentPosition.x - 1,currentPosition.y));
 			candidates.add(new Point(currentPosition.x + 1,currentPosition.y));
 			candidates.add(new Point(currentPosition.x,currentPosition.y - 1));
@@ -127,10 +141,14 @@ public final class PathFinder {
 				}
 			});
 			
-			for(Point p : candidates){
+			/*for(Point p : candidates){
 				System.out.print(nodeMap[p.x][p.y] + ", ");
 			}
-			System.out.println("");
+			System.out.println(""); */
+			
+			if(candidates.size() <= 0){
+				return null;
+			}
 			
 			currentPosition = candidates.get(candidates.size() - 1);
 			path.add(currentPosition);

@@ -3,18 +3,21 @@ package affichage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
+import chose.Chose;
+
+
 import jeu.Case;
 import jeu.Case.TYPE_CASE;
-import jeu.Chose;
 
 public class ChosesPanel extends JPanel{
 
-	ArrayList<Chose> choses;
+	LinkedList<Chose> choses;
 	
-	public ChosesPanel(ArrayList<Chose> choses){
+	public ChosesPanel(LinkedList<Chose> choses){
 		this.choses = choses;
 	}
 	

@@ -1,7 +1,10 @@
-package jeu;
+package chose;
 
+import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+
+import affichage.FenetreJeu;
 
 public abstract class Chose {
 	
@@ -17,8 +20,16 @@ public abstract class Chose {
 		return new Point2D.Float(position.x + largeur/2.0f, position.y + hauteur/2.0f);
 	}
 	
+	public Point getCase() {
+		return new Point((int)getCenterPosition().x/FenetreJeu.TAILLE_CASE,(int)getCenterPosition().y/FenetreJeu.TAILLE_CASE);
+	}
+	
 	public void setCenterPosition(float x,float y) {
 		setPosition(x - largeur/2.0f, y - hauteur/2.0f);
+	}
+	
+	public void setCase(int x,int y) {
+		setCenterPosition(x*FenetreJeu.TAILLE_CASE + FenetreJeu.TAILLE_CASE/2, y*FenetreJeu.TAILLE_CASE + FenetreJeu.TAILLE_CASE/2);
 	}
 
 	public void setPosition(Point2D.Float position) {
