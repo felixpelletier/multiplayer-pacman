@@ -41,30 +41,30 @@ public class Niveau {
 									{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 									{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 									};
+	
+	Case[][] cases = new Case[Case.NB_CASES_X][Case.NB_CASES_Y];
 
 	
 	public Niveau(){
 
+		for(int x=0;x<Case.NB_CASES_X;x++){
+			for(int y=0;y<Case.NB_CASES_Y;y++){
+				TYPE_CASE type = TYPE_CASE.values()[grille[y][x]];
+				cases[x][y] = new Case(type);
+			}
+		}
 		
 	}
 	
 	public Case[][] getCases(){
-		Case[][] Cases = new Case[Case.NB_CASES_X][Case.NB_CASES_Y];
-		for(int x=0;x<Case.NB_CASES_X;x++){
-			for(int y=0;y<Case.NB_CASES_Y;y++){
-				TYPE_CASE type = TYPE_CASE.values()[grille[y][x]];
-				Cases[x][y] = new Case(type);
-			}
-		}
-		
-		return Cases;
+		return cases;
 	}
 	
 	public int getNbPoint(){
 		int resultat = 0;
 		for(int x=0;x<Case.NB_CASES_X;x++){
 			for(int y=0;y<Case.NB_CASES_Y;y++){
-				TYPE_CASE type = TYPE_CASE.values()[grille[y][x]];
+				TYPE_CASE type = cases[x][y].getType();
 				if(type.equals(TYPE_CASE.Point) || type.equals(TYPE_CASE.GrosPoint))
 					resultat++;
 			}

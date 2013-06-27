@@ -1,10 +1,11 @@
-package jeu;
+package chose;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
+import jeu.Case;
 import jeu.Case.TYPE_CASE;
 
 import affichage.FenetreJeu;

@@ -1,6 +1,6 @@
-package jeu;
+package chose;
 
-public class FantomeRose {
+public class FantomeBleu {
 
 	/**
 	 * @param args
