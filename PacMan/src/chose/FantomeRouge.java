@@ -22,8 +22,6 @@ import affichage.outils.SpriteSheetLoader;
  */
 public class FantomeRouge extends Fantome
 {
-
-	private BufferedImage[] sprites;
 	
 	
 	public FantomeRouge(){
@@ -33,37 +31,6 @@ public class FantomeRouge extends Fantome
 		targetTile = homeTile;
 		sprites = SpriteSheetLoader.loadSheet(Pacman.class.getClass().getResource("/images/pacman/" + "Mouvement_spriteMap.gif"));
 	}
-
-	public void mettreAJour(){
-		
-		super.mettreAJour();
-		
-		switch(mode){
-		case Chasser:
-			targetTile = joueur.getCase();
-			break;
-		case Disperser:
-			targetTile = homeTile;
-			break;
-		}
-		
-		if(!decisionPrise && estSurCaseDecision()){
-			
-			direction = deciderDirection();
-			ajusterPosition();
-			decisionPrise = true;
-			
-			
-		}
-		else{
-			decisionPrise = false;
-		}
-		
-		bouger();
-		
-		
-	}
-
 	
 	public BufferedImage getImage() {
 		// TODO Auto-generated method stub
@@ -72,6 +39,11 @@ public class FantomeRouge extends Fantome
 		}
 		
 		return sprites[0];
+	}
+
+	@Override
+	protected Point choisirTargetTile() {
+		return joueur.getCase();
 	}
 
 }

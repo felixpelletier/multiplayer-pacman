@@ -65,7 +65,13 @@ public abstract class Personnage extends Chose{
 		return prochaineCase;
 	}
 	
+	
 	protected Case getProchaineCase(){
+		return getProchaineCase(direction);
+	}
+	
+	
+	protected Case getProchaineCase(DIRECTION direction, int num){
 		return getProchaineCase(direction);
 	}
 	

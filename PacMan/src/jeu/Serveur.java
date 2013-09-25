@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import chose.Chose;
 import chose.Fantome;
+import chose.FantomeBleu;
+import chose.FantomeRose;
 import chose.FantomeRouge;
 import chose.Pacman;
 import jeu.Case.TYPE_CASE;
@@ -12,12 +14,14 @@ import affichage.FenetreJeu;
 public class Serveur {
 	
 	private Case[][] cases = new Case[Case.NB_CASES_X][Case.NB_CASES_Y];
-	private int compteurPoints;
+	private static int compteurPoints;
 	public static long frame = 0;
 	public static int FRAMERATE = 30;
 	
 	public LinkedList<Chose> listeChoses;
 	
+	
+
 	public Serveur(){
 		Niveau niv = new Niveau();
 		
@@ -34,6 +38,12 @@ public class Serveur {
 		
 		FantomeRouge rouge = new FantomeRouge();
 		listeChoses.add(rouge);
+		
+		FantomeRose rose = new FantomeRose();
+		listeChoses.add(rose);
+		
+		FantomeBleu bleu = new FantomeBleu(rouge);
+		listeChoses.add(bleu);
 	
 		FenetreJeu fen = new FenetreJeu(cases,listeChoses);
 		
@@ -63,6 +73,10 @@ public class Serveur {
 		}
 	}
 	
+	public static int getPoints() {
+		return compteurPoints;
+	}
+
 	public static int getSecondes(){
 		return (int) (frame/FRAMERATE);
 	}

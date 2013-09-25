@@ -117,6 +117,7 @@ public final class PathFinder {
 		path.add(currentPosition);
 		
 		
+		boolean termine = false;
 		do{
 			
 			ArrayList<Point> candidates = new ArrayList<Point>(4);
@@ -147,13 +148,17 @@ public final class PathFinder {
 			System.out.println(""); */
 			
 			if(candidates.size() <= 0){
-				return null;
+				termine  = true;
 			}
+			else{
+				currentPosition = candidates.get(candidates.size() - 1);
+			}
+				
+				path.add(currentPosition);
 			
-			currentPosition = candidates.get(candidates.size() - 1);
-			path.add(currentPosition);
 			
-		}while(!currentPosition.equals(source));
+			
+		}while(!currentPosition.equals(source) && !termine);
 		
 		return (Point[]) path.toArray(new Point[0]);
 	}
