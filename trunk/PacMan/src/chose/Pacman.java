@@ -85,6 +85,31 @@ public class Pacman extends Personnage implements KeyListener{
 			animationStep++;
 		}
 	}
+	
+	protected Point getProchainePositionAvecErreur(int num){
+		
+		Point prochainePosition = getCase();
+		
+		switch(direction){
+		case E:
+			prochainePosition.x+=num;
+			break;
+		case N:
+			prochainePosition.x -=num;
+			prochainePosition.y -= num;
+			break;
+		case S:
+			prochainePosition.y += num;
+			break;
+		case W:
+			prochainePosition.x -= num;
+			break;
+		default:
+			break;
+		}
+		
+		return prochainePosition;
+	}
 
 
 	public void keyPressed(KeyEvent e) {

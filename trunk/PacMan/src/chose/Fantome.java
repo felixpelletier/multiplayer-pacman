@@ -2,6 +2,7 @@ package chose;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.util.Date;
 
 import pathFinder.PathFinder;
@@ -17,6 +18,8 @@ public abstract class Fantome extends Personnage{
 	protected static Pacman joueur;
 	protected Point targetTile;
 	protected Point homeTile;
+	
+	protected BufferedImage[] sprites;
 	
 	protected boolean decisionPrise = false;
 
@@ -45,6 +48,10 @@ public abstract class Fantome extends Personnage{
 		
 	}
 	
+	protected void resetTempsDebut(){
+		 tempsDebut = System.currentTimeMillis();
+	}
+	
 	public void mettreAJour(){
 		if(etape < tempsMode.length && (System.currentTimeMillis() - tempsDebut)/1000 > tempsMode[etape]){
 			etape++;
@@ -52,17 +59,38 @@ public abstract class Fantome extends Personnage{
 			renverserDirection();
 		}
 		
+		switch(mode){
+		case Chasser:
+			targetTile = choisirTargetTile();
+			break;
+		case Disperser:
+			targetTile = homeTile;
+			break;
+		}
+		
+		if(!decisionPrise && estSurCaseDecision()){
+			
+			direction = deciderDirection();
+			ajusterPosition();
+			decisionPrise = true;
+			
+			
+		}
+		else{
+			decisionPrise = false;
+		}
+		
+		bouger();
+		
 		
 	}
+	
+	protected abstract Point choisirTargetTile();
 	
 	protected DIRECTION deciderDirection() {
 		Point[] chemin = PathFinder.getPathExcluding(cases, targetTile, this.getCase(), getProchainePosition(getDirectionInverse(direction)));
 		
 		Point prochaineCase = chemin[1];
-		
-		System.out.println("Case: " + getCase());
-		System.out.println("Prochaine Case: " + prochaineCase);
-		System.out.println();
 		
 		if (prochaineCase.x > getCase().x && direction != DIRECTION.W){
 			return DIRECTION.E;
