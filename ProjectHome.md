@@ -1,0 +1,1 @@
+A classic version of pacman but where humans can control the ghosts
